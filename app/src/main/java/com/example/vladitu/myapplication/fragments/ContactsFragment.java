@@ -14,12 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import com.example.vladitu.myapplication.R;
 import com.example.vladitu.myapplication.adapters.AbstractRecyclerAdapter;
 import com.example.vladitu.myapplication.adapters.ContactsRecyclerAdapter;
-import com.example.vladitu.myapplication.adapters.NabContactsArrayAdapter;
+import com.example.vladitu.myapplication.custom.DividerItemDecoration;
 
 /**
  * Created by vlad.itu on 18-Feb-15.
@@ -51,6 +49,7 @@ public class ContactsFragment extends Fragment implements LoaderManager.LoaderCa
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mContactsList = (RecyclerView) getActivity().findViewById(R.id.contacts_list);
+        mContactsList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mContactsList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mContactsList.setHasFixedSize(true);
 

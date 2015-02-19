@@ -6,24 +6,16 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vladitu.myapplication.R;
 import com.example.vladitu.myapplication.fragments.ContactsFragment;
-import com.example.vladitu.myapplication.models.NabContactModel;
-
-import java.lang.reflect.Type;
-import java.text.Normalizer;
-import java.util.ArrayList;
 
 /**
  * Created by vlad.itu on 19-Feb-15.
