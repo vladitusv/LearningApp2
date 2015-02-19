@@ -14,23 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import com.example.vladitu.myapplication.R;
+import com.example.vladitu.myapplication.adapters.NabContactsArrayAdapter;
 
 /**
  * Created by vlad.itu on 18-Feb-15.
  */
 public class ContactsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
-
-    private final static String[] FROM_COLUMNS = {
-            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-            ContactsContract.CommonDataKinds.Phone.NUMBER
-    };
-    private final static int[] TO_IDS = {
-            R.id.tvContactName,
-            R.id.tvContactPhoneNumber
-    };
-    private static final String[] PROJECTION =
+    public static final String[] PROJECTION =
             {
                     ContactsContract.CommonDataKinds.Phone._ID,
                     ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
@@ -42,7 +33,7 @@ public class ContactsFragment extends Fragment implements LoaderManager.LoaderCa
     private String[] mSelectionArgs = {"%%"};
 
     private ListView mContactsList;
-    private SimpleCursorAdapter mCursorAdapter;
+    private NabContactsArrayAdapter mCursorAdapter;
 
     public ContactsFragment() {
     }
@@ -56,8 +47,8 @@ public class ContactsFragment extends Fragment implements LoaderManager.LoaderCa
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mContactsList = (ListView) getActivity().findViewById(R.id.contacts_list);
-        mCursorAdapter = new SimpleCursorAdapter(getActivity(), R.layout.contacts_list_item, null, FROM_COLUMNS, TO_IDS, 0);
         mContactsList.setOnItemClickListener(this);
+        mCursorAdapter = new NabContactsArrayAdapter(getActivity(), null, 0);
         mContactsList.setAdapter(mCursorAdapter);
         getLoaderManager().initLoader(0, null, this);
     }
@@ -69,6 +60,7 @@ public class ContactsFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mCursorAdapter.setSearchString(mSelectionArgs[0].replace("%",""));
         mCursorAdapter.swapCursor(data);
     }
 
@@ -80,7 +72,7 @@ public class ContactsFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Cursor cursor = (Cursor) mCursorAdapter.getItem(position);
-        int contactId = cursor.getInt(1);
+        int contactId = cursor.getInt(cursor.getColumnIndex(PROJECTION[1]));
         Intent intent = new Intent(Intent.ACTION_VIEW);
         Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, String.valueOf(contactId));
         intent.setData(uri);

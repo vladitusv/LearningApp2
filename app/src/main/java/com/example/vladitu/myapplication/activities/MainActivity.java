@@ -51,9 +51,19 @@ public class MainActivity extends ActionBarActivity {
 
     private void initSearchFilter(){
         final TextView searchTextView = (TextView) findViewById(R.id.etSearchText);
+
         TextWatcher fieldValidatorTextWatcher = new TextWatcher() {
+            String previousText = null;
             @Override
             public void afterTextChanged(Editable s) {
+
+                if(previousText == null) {
+                    previousText = searchTextView.getText().toString();
+                }
+                if (filterLongEnough()) {
+                    mContactsFragment.search(searchTextView.getText().toString().trim());
+                }
+                previousText = searchTextView.getText().toString();
             }
 
             @Override
@@ -62,13 +72,17 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (filterLongEnough()) {
-                    mContactsFragment.search(searchTextView.getText().toString().trim());
-                }
+
             }
 
             private boolean filterLongEnough() {
-                return searchTextView.getText().toString().trim().length() > 2;
+                if(previousText.length() < searchTextView.getText().toString().length()){
+                    return searchTextView.getText().toString().trim().length()  > 2;
+                }
+                else if(previousText.length() > searchTextView.getText().toString().length()){
+                    return true;
+                }
+                return false;
             }
         };
         searchTextView.addTextChangedListener(fieldValidatorTextWatcher);
