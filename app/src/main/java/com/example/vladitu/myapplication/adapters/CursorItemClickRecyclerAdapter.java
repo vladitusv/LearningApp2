@@ -4,12 +4,13 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Handler;
-import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.FilterQueryProvider;
 import android.widget.Filterable;
 
+/**
+ * Please see https://gist.githubusercontent.com/Shywim/127f207e7248fe48400b/raw/771d860439bab88b4c3975eb35698634eea3e2d7/CursorRecyclerAdapter.java
+ */
 
 public abstract class CursorItemClickRecyclerAdapter<VH extends AbstractRecyclerAdapter.AbstractViewHolder> extends AbstractRecyclerAdapter<VH> implements Filterable, CursorFilter.CursorFilterClient{
     private boolean mDataValid;

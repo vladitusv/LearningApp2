@@ -5,6 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 
+/**
+ * Please see https://gist.github.com/muresanb/8aadaa817bdb0b66c5b2
+ */
 public abstract class AbstractRecyclerAdapter<VH extends AbstractRecyclerAdapter.AbstractViewHolder> extends RecyclerView.Adapter<VH> {
 
     private OnItemClickListener onItemClickListener;
