@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.Image;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -12,10 +14,12 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vladitu.myapplication.R;
 import com.example.vladitu.myapplication.fragments.ContactsFragment;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by vlad.itu on 19-Feb-15.
@@ -24,10 +28,12 @@ public class ContactsRecyclerAdapter extends CursorItemClickRecyclerAdapter {
 
     private String mSearchString;
     private LayoutInflater mInflater;
+    private Context mContext;
 
     public ContactsRecyclerAdapter(Context context, Cursor cursor) {
         super(cursor);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mContext = context;
     }
 
     @Override
@@ -52,6 +58,16 @@ public class ContactsRecyclerAdapter extends CursorItemClickRecyclerAdapter {
 
         TextView tvPhoneNumber = (TextView) holder.itemView.findViewById(R.id.tvContactPhoneNumber);
         tvPhoneNumber.setText(cursor.getString(cursor.getColumnIndex(ContactsFragment.PROJECTION[3])));
+
+        ImageView ivContactPicture = (ImageView) holder.itemView.findViewById(R.id.ivContactPicture);
+        String contactPicture = cursor.getString(cursor.getColumnIndex(ContactsFragment.PROJECTION[4]));
+        if(contactPicture != null) {
+            Picasso.with(mContext).load(contactPicture).into(ivContactPicture);
+        }else{
+            Picasso.with(mContext).load(R.drawable.ic_action_user).into(ivContactPicture);
+        }
+
+        cursor.moveToPrevious();
     }
 
     public CharSequence highlightString(String search, String originalText) {
@@ -74,11 +90,13 @@ public class ContactsRecyclerAdapter extends CursorItemClickRecyclerAdapter {
     public static class ContactsViewHolder extends AbstractViewHolder {
         public TextView contactName;
         public TextView contactNumber;
+        public ImageView contactPicture;
 
         public ContactsViewHolder(View itemView) {
             super(itemView);
             contactName = (TextView) itemView.findViewById(R.id.tvContactName);
             contactNumber = (TextView) itemView.findViewById(R.id.tvContactPhoneNumber);
+            contactPicture = (ImageView) itemView.findViewById(R.id.ivContactPicture);
         }
     }
 }
