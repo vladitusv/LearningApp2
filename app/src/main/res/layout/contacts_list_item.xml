@@ -5,8 +5,8 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/contact_thumbnail_width"
+        android:layout_height="@dimen/contact_thumbnail_height"
         android:id="@+id/ivContactPicture"/>
 
     <LinearLayout android:orientation="vertical"
