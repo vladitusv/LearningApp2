@@ -3,9 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/my_awesome_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ToolbarMaterialTheme"/>
+
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/my_awesome_toolbar"
         android:name="com.example.vladitu.myapplication.fragments.ContactsFragment"
         android:id="@+id/contacts_fragment"
         tools:layout="@layout/contacts_list_fragment" />

@@ -5,6 +5,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.vladitu.myapplication.R;
@@ -19,6 +20,9 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContactsFragment = (ContactsFragment) getFragmentManager().findFragmentById(R.id.contacts_fragment);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override

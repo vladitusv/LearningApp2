@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.vladitu.myapplication.R;
 import com.example.vladitu.myapplication.adapters.AbstractRecyclerAdapter;
 import com.example.vladitu.myapplication.adapters.ContactsRecyclerAdapter;
@@ -92,4 +93,5 @@ public class ContactsFragment extends Fragment implements LoaderManager.LoaderCa
         intent.setData(uri);
         getActivity().startActivity(intent);
     }
+
 }
